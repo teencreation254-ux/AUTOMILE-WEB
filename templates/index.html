@@ -1,10 +1,201 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Auto Mile</title>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AUTOMILE | Every Mile With You</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<script defer src="{{ url_for('static', filename='script.js') }}"></script>
+
 </head>
+
 <body>
-    <h1>Welcome to Auto Mile</h1>
-    <p>Your website is working successfully.</p>
-</body>
-</html>
+
+<header class="navbar">
+
+<div class="logo">
+
+<h1>AUTOMILE</h1>
+
+<p>Every Mile With You</p>
+
+</div>
+
+<nav>
+
+<a href="#">Home</a>
+
+<a href="#services">Services</a>
+
+<a href="#about">About</a>
+
+<a href="#contact">Contact</a>
+
+<a href="#quote">Get Quote</a>
+
+</nav>
+
+</header>
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h2>
+Building Confidence In You Through Intelligent Fleet Solutions
+</h2>
+
+<p>
+
+Vehicle Tracking • Fleet Management • Fuel Monitoring • Dash Cameras
+
+</p>
+
+<div class="buttons">
+
+<a href="#quote" class="btn">
+Request Quote
+</a>
+
+<a href="https://wa.me/254783498029" class="btn-whatsapp">
+WhatsApp Us
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="services">
+
+<h2>Our Solutions</h2>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>Vehicle Tracking</h3>
+
+<p>
+Monitor your vehicles in real time from anywhere.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Fleet Management</h3>
+
+<p>
+Manage your fleet with powerful reporting and live monitoring.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Fuel Monitoring</h3>
+
+<p>
+Reduce fuel losses and improve accountability.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Dash Cameras</h3>
+
+<p>
+Protect every journey with smart video surveillance.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Speed Limiters</h3>
+
+<p>
+Improve driver safety and remain compliant.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Asset Tracking</h3>
+
+<p>
+Track valuable assets anytime, anywhere.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="about">
+
+<h2>About AUTOMILE</h2>
+
+<p>
+
+AUTOMILE provides intelligent fleet management and vehicle security solutions across East Africa. We help businesses improve efficiency, enhance safety, reduce operational costs, and monitor fleets in real time.
+
+</p>
+
+</section>
+
+<section id="quote">
+
+<h2>Request a Quote</h2>
+
+<form method="POST">
+
+<input
+type="text"
+name="name"
+placeholder="Full Name"
+required>
+
+<input
+type="text"
+name="phone"
+placeholder="Phone Number"
+required>
+
+<input
+type="text"
+name="service"
+placeholder="Service Required"
+required>
+
+<textarea
+name="message"
+rows="5"
+placeholder="Tell us more about your needs..."></textarea>
+
+<button type="submit">
+
+Send Request
+
+</button>
+
+</form>
+
+</section>
+
+<section id="contact">
+
+<h2>Contact Us</h2>
+
+<p>📞 WhatsApp: 0722 793 153
