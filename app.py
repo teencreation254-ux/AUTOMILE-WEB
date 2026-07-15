@@ -6,7 +6,7 @@ app = Flask(__name__)
 WHATSAPP_NUMBER = "254733498029"
 
 @app.route("/", methods=["GET", "POST"])
-def home():
+
 def home():
     if request.method == "POST":
         name = request.form.get("name")
