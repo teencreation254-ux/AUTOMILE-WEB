@@ -7,18 +7,17 @@ WHATSAPP_NUMBER = "254733498029"
 
 @app.route("/", methods=["GET", "POST"])
 def home():
+def home():
     if request.method == "POST":
-       name = request.form.get("name")
-phone = request.form.get("phone")
-service = request.form.get("service")
-location = request.form.get("location")
-destination = request.form.get("destination")
-message = request.form.get("message") 
-        
-        
-        
+        name = request.form.get("name")
+        phone = request.form.get("phone")
+        service = request.form.get("service")
+        location = request.form.get("location")
+        destination = request.form.get("destination")
+        message = request.form.get("message")
 
-        text = f"""🚗 AUTOMILE SERVICE REQUEST
+        text = f"""
+🚗 AUTOMILE SERVICE REQUEST
 
 Customer Name: {name}
 Phone Number: {phone}
