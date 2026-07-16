@@ -326,3 +326,47 @@ font-size:18px;
     color:#666;
     line-height:1.7;
 }
+/* ===========================
+   Fleet Features
+=========================== */
+
+.fleet-features{
+    padding:90px 8%;
+    background:#ffffff;
+}
+
+.features-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+.feature-box{
+    background:#f8f9fb;
+    border-radius:15px;
+    padding:30px;
+    text-align:center;
+    transition:.3s;
+    border:1px solid #eee;
+}
+
+.feature-box:hover{
+    transform:translateY(-8px);
+    box-shadow:0 15px 30px rgba(0,0,0,.12);
+}
+
+.feature-box span{
+    font-size:45px;
+    display:block;
+    margin-bottom:20px;
+}
+
+.feature-box h3{
+    color:#003366;
+    margin-bottom:15px;
+}
+
+.feature-box p{
+    color:#666;
+    line-height:1.7;
+}
