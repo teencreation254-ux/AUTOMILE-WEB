@@ -39,3 +39,34 @@ document.querySelectorAll(".btn, .btn-whatsapp").forEach(btn => {
 });
 
 console.log("AUTOMILE website loaded successfully.");
+document.addEventListener("DOMContentLoaded", function(){
+
+    const featureTitles = document.querySelectorAll(".feature-box h3");
+
+    featureTitles.forEach(function(title, index){
+
+        const originalText = title.textContent.trim();
+
+        title.textContent = "";
+
+        let letter = 0;
+
+        setTimeout(function(){
+
+            const typing = setInterval(function(){
+
+                title.textContent += originalText.charAt(letter);
+
+                letter++;
+
+                if(letter >= originalText.length){
+                    clearInterval(typing);
+                }
+
+            }, 70);
+
+        }, index * 500);
+
+    });
+
+});
