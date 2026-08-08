@@ -342,9 +342,15 @@ font-size:18px;
    Fleet Management Features
 =========================== */
 
-.fleet-features{
+
+  .fleet-solutions{
     padding:90px 8%;
-    background:#f7f9fc;
+    background-image: url("/static/fleet-background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
 }
 
 .section-title{
