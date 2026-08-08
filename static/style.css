@@ -262,7 +262,7 @@ font-size:18px;
   .fleet-solutions{
     padding:90px 8%;
     position:relative;
-    background-image:url("images/fleet-background.jpg.png");
+    background-image:url("/static/images/fleet-background.jpg.png");
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
