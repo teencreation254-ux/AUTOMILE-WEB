@@ -70,3 +70,27 @@ document.addEventListener("DOMContentLoaded", function(){
     });
 
 });
+// Fleet feature title typing animation
+document.addEventListener("DOMContentLoaded", function () {
+
+    const titles = document.querySelectorAll(".feature-box h3");
+
+    titles.forEach(function (title, index) {
+
+        const originalText = title.textContent;
+        title.textContent = "";
+
+        let letter = 0;
+
+        function typeTitle() {
+            if (letter < originalText.length) {
+                title.textContent += originalText.charAt(letter);
+                letter++;
+                setTimeout(typeTitle, 70);
+            }
+        }
+
+        setTimeout(typeTitle, index * 700);
+    });
+
+});
