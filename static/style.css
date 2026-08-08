@@ -259,12 +259,10 @@ font-size:18px;
    Fleet Solutions Section
 =========================== */
 
-   .fleet-solutions{
-    position:relative;
+  .fleet-solutions{
     padding:90px 8%;
-    background-image:
-        linear-gradient(rgba(0, 25, 55, 0.72), rgba(0, 25, 55, 0.72)),
-        url("/static/images/truck-road.png");
+    position:relative;
+    background-image:url("images/fleet-background.jpg.png");
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
