@@ -411,8 +411,8 @@ font-size:18px;
     font-weight:700;
 }
 
-.feature-box p{
-    color:#666;
+  .fleet-card p{
+    color:#444;
     line-height:1.7;
     font-size:16px;
 }
