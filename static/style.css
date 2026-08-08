@@ -326,49 +326,78 @@ font-size:18px;
     color:#666;
     line-height:1.7;
 }
+
 /* ===========================
-   Fleet Features
+   Fleet Management Features
 =========================== */
 
 .fleet-features{
     padding:90px 8%;
-    background:#ffffff;
+    background:#f7f9fc;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+.section-title h2{
+    font-size:40px;
+    color:#003366;
+    margin-bottom:15px;
+}
+
+.section-title p{
+    color:#666;
+    font-size:18px;
+    max-width:700px;
+    margin:auto;
+    line-height:1.7;
 }
 
 .features-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:25px;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
 }
 
 .feature-box{
-    background:#f8f9fb;
-    border-radius:15px;
-    padding:30px;
+    background:#fff;
+    padding:35px;
+    border-radius:18px;
     text-align:center;
-    transition:.3s;
-    border:1px solid #eee;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    transition:.35s;
 }
 
 .feature-box:hover{
-    transform:translateY(-8px);
-    box-shadow:0 15px 30px rgba(0,0,0,.12);
+    transform:translateY(-10px);
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
 }
 
 .feature-box span{
-    font-size:45px;
-    display:block;
-    margin-bottom:20px;
+    width:80px;
+    height:80px;
+    background:#0056b3;
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:32px;
+    margin:0 auto 20px;
 }
 
 .feature-box h3{
     color:#003366;
     margin-bottom:15px;
+    font-size:22px;
 }
 
 .feature-box p{
     color:#666;
     line-height:1.7;
+    font-size:16px;
 }
 /* ===========================================
    AUTO MILE PREMIUM FLEET ANIMATION
