@@ -310,7 +310,27 @@ Send Request
 <p>📞 WhatsApp: 0731 498 029</p>
 
 </section>
+<!-- Solution Details Popup -->
 
+<div id="solutionModal" class="solution-modal">
+
+    <div class="solution-modal-content">
+
+        <button class="close-solution" onclick="closeSolution()">×</button>
+
+        <h2 id="solutionTitle"></h2>
+
+        <p id="solutionDescription"></p>
+
+        <div id="solutionDetails"></div>
+
+        <button class="solution-contact" onclick="closeSolution(); document.getElementById('contact').scrollIntoView({behavior:'smooth'});">
+            Get Started
+        </button>
+
+    </div>
+
+</div>
 </body>
 
 </html>

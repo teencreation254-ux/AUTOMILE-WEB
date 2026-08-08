@@ -802,3 +802,188 @@ font-size:18px;
     }
 
 }
+/* =========================================
+   SOLUTION DETAILS
+========================================= */
+
+.solution-card {
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.solution-card span {
+    display: inline-block;
+    margin-top: 15px;
+    font-weight: 600;
+    color: #0056b3;
+}
+
+.solution-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+
+/* Popup background */
+
+.solution-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: all 0.3s ease;
+
+    z-index: 9999;
+}
+
+
+/* Show popup */
+
+.solution-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* Popup box */
+
+.solution-modal-content {
+    position: relative;
+
+    width: 100%;
+    max-width: 650px;
+
+    max-height: 85vh;
+    overflow-y: auto;
+
+    background: white;
+
+    border-radius: 22px;
+
+    padding: 45px;
+
+    box-shadow: 0 25px 70px rgba(0,0,0,0.3);
+
+    transform: translateY(30px) scale(0.95);
+
+    transition: all 0.3s ease;
+}
+
+
+/* Popup animation */
+
+.solution-modal.active .solution-modal-content {
+    transform: translateY(0) scale(1);
+}
+
+
+/* Close button */
+
+.close-solution {
+    position: absolute;
+
+    top: 15px;
+    right: 20px;
+
+    width: 40px;
+    height: 40px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #f1f1f1;
+
+    font-size: 28px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.close-solution:hover {
+    background: #0056b3;
+    color: white;
+}
+
+
+/* Title */
+
+.solution-modal-content h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+
+/* Description */
+
+.solution-modal-content > p {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+
+/* Details */
+
+.solution-modal-content ul {
+    padding-left: 20px;
+}
+
+.solution-modal-content li {
+    margin-bottom: 13px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+
+/* Get started button */
+
+.solution-contact {
+    margin-top: 25px;
+
+    padding: 13px 28px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #0056b3;
+    color: white;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.solution-contact:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .solution-modal-content {
+        padding: 35px 25px;
+    }
+
+    .solution-modal-content h2 {
+        font-size: 25px;
+    }
+
+}

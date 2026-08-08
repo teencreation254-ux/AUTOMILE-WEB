@@ -283,3 +283,134 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+function openSolution(solution) {
+
+    const modal = document.getElementById("solutionModal");
+    const title = document.getElementById("solutionTitle");
+    const description = document.getElementById("solutionDescription");
+    const details = document.getElementById("solutionDetails");
+
+    const solutions = {
+
+        tracking: {
+            title: "Vehicle Tracking",
+            description: "Know where your vehicles are, wherever they are.",
+            details: `
+                <ul>
+                    <li>Real-time vehicle location</li>
+                    <li>Live vehicle movement</li>
+                    <li>Trip history and route playback</li>
+                    <li>Vehicle status monitoring</li>
+                    <li>Geofencing and location alerts</li>
+                    <li>Driver and vehicle activity monitoring</li>
+                </ul>
+            `
+        },
+
+        fleet: {
+            title: "Fleet Management",
+            description: "Take complete control of your fleet from one platform.",
+            details: `
+                <ul>
+                    <li>Centralized fleet monitoring</li>
+                    <li>Vehicle activity reports</li>
+                    <li>Driver performance monitoring</li>
+                    <li>Fleet utilization reports</li>
+                    <li>Maintenance management</li>
+                    <li>Fleet activity history</li>
+                </ul>
+            `
+        },
+
+        fuel: {
+            title: "Fuel Monitoring",
+            description: "Improve fuel accountability and reduce unnecessary losses.",
+            details: `
+                <ul>
+                    <li>Monitor fuel levels</li>
+                    <li>Detect unusual fuel consumption</li>
+                    <li>Identify possible fuel theft</li>
+                    <li>Fuel usage reports</li>
+                    <li>Fuel consumption analysis</li>
+                    <li>Improve fuel accountability</li>
+                </ul>
+            `
+        },
+
+        camera: {
+            title: "Dash Cameras",
+            description: "Capture what happens on the road and protect every journey.",
+            details: `
+                <ul>
+                    <li>Front and rear video recording</li>
+                    <li>Live video monitoring</li>
+                    <li>Driver and road visibility</li>
+                    <li>Incident recording</li>
+                    <li>Video evidence when needed</li>
+                    <li>Improved driver accountability</li>
+                </ul>
+            `
+        },
+
+        speed: {
+            title: "Speed Limiters",
+            description: "Promote safer driving and better control of vehicle speeds.",
+            details: `
+                <ul>
+                    <li>Control maximum vehicle speed</li>
+                    <li>Improve road safety</li>
+                    <li>Reduce excessive speeding</li>
+                    <li>Monitor speed activity</li>
+                    <li>Support responsible driving</li>
+                    <li>Improve fleet compliance</li>
+                </ul>
+            `
+        },
+
+        asset: {
+            title: "Asset Tracking",
+            description: "Keep track of valuable equipment and assets wherever they go.",
+            details: `
+                <ul>
+                    <li>Real-time asset location</li>
+                    <li>Asset movement monitoring</li>
+                    <li>Location history</li>
+                    <li>Geofence alerts</li>
+                    <li>Asset security monitoring</li>
+                    <li>Improve asset accountability</li>
+                </ul>
+            `
+        }
+
+    };
+
+    const selected = solutions[solution];
+
+    title.textContent = selected.title;
+    description.textContent = selected.description;
+    details.innerHTML = selected.details;
+
+    modal.classList.add("active");
+}
+
+
+function closeSolution() {
+
+    const modal = document.getElementById("solutionModal");
+
+    modal.classList.remove("active");
+
+}
+
+
+// Close popup when clicking outside it
+
+document.addEventListener("click", function(event) {
+
+    const modal = document.getElementById("solutionModal");
+
+    if (event.target === modal) {
+        closeSolution();
+    }
+
+});
