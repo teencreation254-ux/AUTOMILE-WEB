@@ -404,10 +404,11 @@ font-size:18px;
     margin:0 auto 20px;
 }
 
-.feature-box h3{
+   .fleet-card h3{
     color:#003366;
     margin-bottom:15px;
     font-size:22px;
+    font-weight:700;
 }
 
 .feature-box p{
