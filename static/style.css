@@ -1804,7 +1804,7 @@ font-size:18px;
 }
 /* =========================================================
    AUTOMILE CINEMATIC SOLUTIONS
-   SCROLL-DRIVEN VERSION
+   FINAL 6-SCENE SCROLL SYSTEM
 ========================================================= */
 
 .cinematic-solutions {
@@ -1812,130 +1812,27 @@ font-size:18px;
     width: 100%;
     height: 600vh;
     min-height: 600vh;
-    background: #05070b;
-    color: #ffffff;
     overflow: visible;
 }
 
 
-/* =========================================
-   FIXED/STICKY CINEMATIC CONTENT
-========================================= */
+/* Keep the content on screen while scrolling */
 
 .cinematic-content {
     position: sticky;
     top: 0;
+
     width: 100%;
     height: 100vh;
     min-height: 100vh;
 
     overflow: hidden;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    padding: 100px 8%;
     box-sizing: border-box;
-
-    z-index: 5;
 }
 
 
-/* =========================================
-   BACKGROUND VIDEO
-========================================= */
-
-.cinematic-video {
-    position: absolute;
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    z-index: 0;
-}
-
-.cinematic-video video {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-    display: block;
-}
-
-
-/* =========================================
-   DARK OVERLAY
-========================================= */
-
-.cinematic-overlay {
-    position: absolute;
-    inset: 0;
-
-    z-index: 1;
-
-    pointer-events: none;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(0,0,0,0.78) 0%,
-            rgba(0,0,0,0.48) 50%,
-            rgba(0,0,0,0.25) 100%
-        );
-}
-
-
-/* =========================================
-   HEADING
-========================================= */
-
-.cinematic-heading {
-    position: relative;
-    z-index: 5;
-
-    max-width: 720px;
-    margin-bottom: 55px;
-}
-
-.cinematic-eyebrow {
-    display: block;
-
-    margin-bottom: 18px;
-
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 4px;
-
-    color: rgba(255,255,255,0.8);
-}
-
-.cinematic-heading h2 {
-    margin: 0;
-
-    font-size: clamp(42px, 5vw, 76px);
-    line-height: 1.05;
-    letter-spacing: -1.5px;
-
-    color: #ffffff;
-}
-
-.cinematic-heading p {
-    max-width: 580px;
-
-    margin-top: 22px;
-
-    font-size: 18px;
-    line-height: 1.7;
-
-    color: rgba(255,255,255,0.82);
-}
-
-
-/* =========================================
-   SOLUTION SCENES
-========================================= */
+/* Scene container */
 
 .solution-scenes {
     position: relative;
@@ -1943,21 +1840,17 @@ font-size:18px;
     width: 100%;
     max-width: 680px;
 
-    min-height: 220px;
-
-    z-index: 10;
+    height: 250px;
 }
 
 
-/* =========================================
-   INDIVIDUAL SCENES
-========================================= */
+/* Every scene sits in the same position */
 
 .cinematic-scene {
     position: absolute;
 
-    left: 0;
     top: 0;
+    left: 0;
 
     width: 100%;
 
@@ -1967,142 +1860,29 @@ font-size:18px;
     transform: translateY(40px);
 
     transition:
-        opacity 0.7s ease,
-        transform 0.7s ease,
-        visibility 0.7s ease;
-
-    z-index: 1;
+        opacity 0.6s ease,
+        transform 0.6s ease,
+        visibility 0.6s ease;
 }
 
 
-/* =========================================
-   ACTIVE SCENE
-========================================= */
+/* IMPORTANT:
+   The active scene MUST be visible */
 
 .cinematic-scene.active {
     opacity: 1;
     visibility: visible;
 
     transform: translateY(0);
-
-    z-index: 5;
 }
 
 
-/* =========================================
-   SCENE NUMBER
-========================================= */
-
-.scene-number {
-    margin-bottom: 14px;
-
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 3px;
-
-    color: rgba(255,255,255,0.7);
-}
-
-.scene-number span {
-    opacity: 0.4;
-}
-
-
-/* =========================================
-   SCENE TITLE
-========================================= */
-
-.cinematic-scene h3 {
-    margin: 0 0 12px;
-
-    font-size: clamp(34px, 4vw, 56px);
-    line-height: 1.1;
-
-    color: #ffffff;
-}
-
-
-/* =========================================
-   SCENE DESCRIPTION
-========================================= */
-
-.cinematic-scene p {
-    max-width: 520px;
-
-    margin: 0;
-
-    font-size: 18px;
-    line-height: 1.7;
-
-    color: rgba(255,255,255,0.82);
-}
-
-
-/* =========================================
-   SCROLL INDICATOR
-========================================= */
+/* Scroll indicator */
 
 .cinematic-scroll {
     position: absolute;
-
     left: 8%;
     bottom: 38px;
 
-    display: flex;
-    align-items: center;
-
-    gap: 18px;
-
     z-index: 20;
-
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 3px;
-
-    color: rgba(255,255,255,0.75);
-}
-
-.scroll-line {
-    width: 65px;
-    height: 1px;
-
-    background: rgba(255,255,255,0.6);
-}
-
-
-/* =========================================
-   MOBILE
-========================================= */
-
-@media (max-width: 768px) {
-
-    .cinematic-content {
-        padding: 80px 7%;
-    }
-
-    .cinematic-heading {
-        margin-bottom: 45px;
-    }
-
-    .cinematic-heading h2 {
-        font-size: 40px;
-    }
-
-    .cinematic-heading p {
-        font-size: 16px;
-    }
-
-    .cinematic-scene h3 {
-        font-size: 34px;
-    }
-
-    .cinematic-scene p {
-        font-size: 16px;
-    }
-
-    .cinematic-scroll {
-        left: 7%;
-        bottom: 28px;
-    }
-
 }
