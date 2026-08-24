@@ -545,54 +545,26 @@ document.addEventListener("DOMContentLoaded", function () {
         observer.observe(card);
 
     });
-
-});
-/// Fade in normal sections as you scroll
-// Cinematic Solutions is intentionally excluded.
-
-const sections = document.querySelectorAll(
-    "section:not(.cinematic-solutions)"
-);
-
-const observer = new IntersectionObserver((entries) => {
-
-    entries.forEach(entry => {
-
-        if (entry.isIntersecting) {
-
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0)";
-
-        }
-
-    });
-
-}, {
-    threshold: 0.2
-});
-
-
-sections.forEach(section => {
-
-    section.style.opacity = "0";
-    section.style.transform = "translateY(40px)";
-    section.style.transition = "all 0.8s ease";
-
-    observer.observe(section);
-
-});
- /* =========================================================
+    /* =========================================================
    AUTOMILE CINEMATIC SOLUTIONS
-   SCROLL ENGINE
+   FINAL 6-SCENE SCROLL ENGINE
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
 
     const section = document.querySelector(".cinematic-solutions");
-    const scenes = document.querySelectorAll(".cinematic-scene");
 
-    if (!section || scenes.length === 0) {
-        console.log("Cinematic section or scenes not found.");
+    const scenes = document.querySelectorAll(
+        ".cinematic-solutions .cinematic-scene"
+    );
+
+    if (!section) {
+        console.log("Cinematic section NOT found.");
+        return;
+    }
+
+    if (scenes.length === 0) {
+        console.log("No cinematic scenes found.");
         return;
     }
 
@@ -627,19 +599,29 @@ document.addEventListener("DOMContentLoaded", function () {
         const totalScroll =
             section.offsetHeight - window.innerHeight;
 
+
         if (totalScroll <= 0) {
             showScene(0);
             return;
         }
 
-        const scrolled = -rect.top;
 
-        let progress = scrolled / totalScroll;
-
-        progress = Math.max(0, Math.min(1, progress));
+        const distanceScrolled = -rect.top;
 
 
-        let index = Math.floor(progress * scenes.length);
+        let progress =
+            distanceScrolled / totalScroll;
+
+
+        progress = Math.max(
+            0,
+            Math.min(1, progress)
+        );
+
+
+        let index =
+            Math.floor(progress * scenes.length);
+
 
         if (index >= scenes.length) {
             index = scenes.length - 1;
@@ -651,11 +633,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // Start with Vehicle Tracking
+    /* Start with scene 1 */
+
     showScene(0);
 
 
-    // Change scene while scrolling
+    /* Listen for scrolling */
+
     window.addEventListener(
         "scroll",
         updateScenes,
@@ -663,14 +647,14 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 
-    // Recalculate when window size changes
+    /* Recalculate if window size changes */
+
     window.addEventListener(
         "resize",
         updateScenes
     );
 
 
-    // Initial calculation
     updateScenes();
 
 });
