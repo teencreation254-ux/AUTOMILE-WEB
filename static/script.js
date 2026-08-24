@@ -583,7 +583,7 @@ sections.forEach(section => {
 });
  /* =========================================================
    AUTOMILE CINEMATIC SOLUTIONS
-   SINGLE SCROLL ENGINE
+   SCROLL ENGINE
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -604,14 +604,19 @@ document.addEventListener("DOMContentLoaded", function () {
         scenes.forEach(function (scene, i) {
 
             if (i === index) {
+
                 scene.classList.add("active");
+
             } else {
+
                 scene.classList.remove("active");
+
             }
 
         });
 
         console.log("Showing scene:", index + 1);
+
     }
 
 
@@ -627,17 +632,14 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        const scrollPosition = -rect.top;
+        const scrolled = -rect.top;
 
-        let progress =
-            scrollPosition / totalScroll;
+        let progress = scrolled / totalScroll;
 
         progress = Math.max(0, Math.min(1, progress));
 
 
-        let index =
-            Math.floor(progress * scenes.length);
-
+        let index = Math.floor(progress * scenes.length);
 
         if (index >= scenes.length) {
             index = scenes.length - 1;
@@ -645,26 +647,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         showScene(index);
+
     }
 
 
     // Start with Vehicle Tracking
     showScene(0);
 
-    // Update while scrolling
+
+    // Change scene while scrolling
     window.addEventListener(
         "scroll",
         updateScenes,
         { passive: true }
     );
 
-    // Update if window size changes
+
+    // Recalculate when window size changes
     window.addEventListener(
         "resize",
         updateScenes
     );
 
-    // Run once immediately
+
+    // Initial calculation
     updateScenes();
 
 });
