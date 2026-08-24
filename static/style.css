@@ -1925,3 +1925,10 @@ font-size:18px;
     visibility: visible;
     transform: translateY(0);
 }
+.cinematic-scene {
+    position: relative !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    margin-bottom: 80px !important;
+}
