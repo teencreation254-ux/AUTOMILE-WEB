@@ -547,3 +547,177 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+/* =========================================================
+   AUTOMILE CINEMATIC SOLUTIONS
+   STEP 3 — SCROLL CONTROL
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const cinematicSection =
+        document.querySelector(".cinematic-solutions");
+
+    const scenes =
+        document.querySelectorAll(".cinematic-scene");
+
+    const video =
+        document.getElementById("solutionsVideo");
+
+    if (!cinematicSection || !scenes.length) {
+        return;
+    }
+
+
+    /* =========================================
+       SCENE CONTROL
+    ========================================= */
+
+    function activateScene(index) {
+
+        scenes.forEach((scene, i) => {
+
+            scene.classList.toggle(
+                "active",
+                i === index
+            );
+
+        });
+
+    }
+
+
+    /* =========================================
+       SCROLL POSITION
+    ========================================= */
+
+    function updateCinematicScene() {
+
+        const rect =
+            cinematicSection.getBoundingClientRect();
+
+        const sectionHeight =
+            cinematicSection.offsetHeight;
+
+        const viewportHeight =
+            window.innerHeight;
+
+
+        /*
+         * Calculate how far the visitor has
+         * travelled through the section.
+         */
+
+        const travelled =
+            -rect.top;
+
+
+        const scrollRange =
+            sectionHeight - viewportHeight;
+
+
+        if (scrollRange <= 0) {
+            return;
+        }
+
+
+        let progress =
+            travelled / scrollRange;
+
+
+        /*
+         * Keep progress between 0 and 1.
+         */
+
+        progress =
+            Math.max(
+                0,
+                Math.min(1, progress)
+            );
+
+
+        /*
+         * Convert scroll progress
+         * into one of the six scenes.
+         */
+
+        let sceneIndex =
+            Math.floor(
+                progress * scenes.length
+            );
+
+
+        /*
+         * Prevent an index of 6.
+         */
+
+        if (sceneIndex >= scenes.length) {
+            sceneIndex = scenes.length - 1;
+        }
+
+
+        activateScene(sceneIndex);
+
+
+        /* =====================================
+           VIDEO CONTROL
+        ===================================== */
+
+        if (video && video.readyState >= 2) {
+
+            /*
+             * The video remains smooth while
+             * scrolling rather than restarting.
+             */
+
+            if (video.paused) {
+
+                video.play().catch(() => {});
+
+            }
+
+        }
+
+    }
+
+
+    /* =========================================
+       SCROLL LISTENER
+    ========================================= */
+
+    let ticking = false;
+
+    window.addEventListener(
+        "scroll",
+        function () {
+
+            if (!ticking) {
+
+                window.requestAnimationFrame(
+                    function () {
+
+                        updateCinematicScene();
+
+                        ticking = false;
+
+                    }
+                );
+
+                ticking = true;
+
+            }
+
+        },
+        { passive: true }
+    );
+
+
+    /* =========================================
+       INITIAL STATE
+    ========================================= */
+
+    activateScene(0);
+
+    updateCinematicScene();
+
+
+});
