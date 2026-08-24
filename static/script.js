@@ -615,29 +615,24 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("solutionsVideo");
 
 
-    // Stop if the cinematic section is not on the page
     if (!cinematicSection || scenes.length === 0) {
+        console.log("AUTOMILE cinematic section not found.");
         return;
     }
 
 
     /* =========================================
-       ACTIVATE ONE SCENE
+       ACTIVATE SCENE
     ========================================= */
 
     function activateScene(index) {
 
         scenes.forEach(function (scene, i) {
 
-            if (i === index) {
-
-                scene.classList.add("active");
-
-            } else {
-
-                scene.classList.remove("active");
-
-            }
+            scene.classList.toggle(
+                "active",
+                i === index
+            );
 
         });
 
@@ -645,16 +640,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================
-       CALCULATE SCROLL PROGRESS
+       UPDATE SCENE FROM PAGE SCROLL
     ========================================= */
 
     function updateCinematicScene() {
 
-        const rect =
-            cinematicSection.getBoundingClientRect();
-
         const sectionTop =
-            rect.top;
+            cinematicSection.offsetTop;
 
         const sectionHeight =
             cinematicSection.offsetHeight;
@@ -664,8 +656,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /*
-         * How much of the cinematic section
-         * is available for scrolling.
+         * Total distance available for
+         * the cinematic scroll.
          */
 
         const scrollDistance =
@@ -679,16 +671,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /*
-         * Current scroll position inside
-         * the cinematic section.
+         * How far the user has travelled
+         * inside the cinematic section.
          */
 
-        let progress =
-            -sectionTop / scrollDistance;
+        const travelled =
+            window.scrollY - sectionTop;
 
 
         /*
-         * Keep progress between 0 and 1.
+         * Convert to percentage.
+         */
+
+        let progress =
+            travelled / scrollDistance;
+
+
+        /*
+         * Keep between 0 and 1.
          */
 
         progress =
@@ -699,8 +699,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /*
-         * Convert scroll progress into
-         * one of the six scenes.
+         * Six scenes:
+         *
+         * 0 = Vehicle Tracking
+         * 1 = Fleet Management
+         * 2 = Fuel Monitoring
+         * 3 = Dash Cameras
+         * 4 = Speed Limiters
+         * 5 = Asset Tracking
          */
 
         let sceneIndex =
@@ -708,11 +714,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 progress * scenes.length
             );
 
-
-        /*
-         * Make sure the last scene
-         * remains scene 06.
-         */
 
         if (sceneIndex >= scenes.length) {
 
@@ -726,7 +727,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /* =====================================
-           VIDEO
+           PLAY BACKGROUND VIDEO
         ===================================== */
 
         if (video) {
@@ -743,7 +744,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================
-       SMOOTH SCROLL PERFORMANCE
+       SCROLL LISTENER
     ========================================= */
 
     let ticking = false;
@@ -773,12 +774,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================
-       INITIAL SCENE
+       INITIALIZE
     ========================================= */
 
     activateScene(0);
 
     updateCinematicScene();
 
+
+    console.log(
+        "AUTOMILE cinematic solutions initialized:",
+        scenes.length,
+        "scenes"
+    );
 
 });
