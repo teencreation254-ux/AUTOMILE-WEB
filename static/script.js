@@ -581,49 +581,53 @@ sections.forEach(section => {
     observer.observe(section);
 
 });
-    /* =========================================
-       SCENE CONTROL
-    ========================================= */
-
-    function activateScene(index) {
-
-        scenes.forEach((scene, i) => {
-
-            scene.classList.toggle(
-                "active",
-                i === index
-            );
-
-        });
-
-    }
-
-/* =========================================================
+ /* =========================================================
    AUTOMILE CINEMATIC SOLUTIONS
-   SCROLL CONTROL
+   FINAL SCROLL CONTROL
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const cinematicSection =
-        document.querySelector(".cinematic-solutions");
+    const section = document.querySelector(".cinematic-solutions");
+    const scenes = document.querySelectorAll(".cinematic-scene");
 
-    const scenes =
-        document.querySelectorAll(".cinematic-scene");
-
-    if (!cinematicSection || !scenes.length) {
+    if (!section || scenes.length === 0) {
+        console.log("Cinematic section not found.");
         return;
     }
 
+    console.log("AUTOMILE CINEMATIC: 6 scenes detected");
 
-    function activateScene(index) {
+
+    /*
+     * Give the cinematic section enough
+     * vertical space for all 6 scenes.
+     */
+    section.style.height = "600vh";
+    section.style.minHeight = "600vh";
+
+
+    /*
+     * Show the selected scene.
+     */
+    function showScene(index) {
 
         scenes.forEach(function (scene, i) {
 
             if (i === index) {
-                scene.classList.add("active");
+
+                scene.style.opacity = "1";
+                scene.style.visibility = "visible";
+                scene.style.transform = "translateY(0)";
+                scene.style.zIndex = "5";
+
             } else {
-                scene.classList.remove("active");
+
+                scene.style.opacity = "0";
+                scene.style.visibility = "hidden";
+                scene.style.transform = "translateY(35px)";
+                scene.style.zIndex = "1";
+
             }
 
         });
@@ -631,30 +635,23 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    function updateCinematicScene() {
+    /*
+     * Calculate which scene should be visible.
+     */
+    function updateCinematic() {
 
-        const rect =
-            cinematicSection.getBoundingClientRect();
+        const rect = section.getBoundingClientRect();
 
-        const sectionHeight =
-            cinematicSection.offsetHeight;
+        const scrollableDistance =
+            section.offsetHeight - window.innerHeight;
 
-        const viewportHeight =
-            window.innerHeight;
-
-
-        const scrollDistance =
-            sectionHeight - viewportHeight;
-
-
-        if (scrollDistance <= 0) {
-            activateScene(0);
+        if (scrollableDistance <= 0) {
             return;
         }
 
 
         let progress =
-            -rect.top / scrollDistance;
+            (-rect.top) / scrollableDistance;
 
 
         progress =
@@ -670,156 +667,36 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        activateScene(sceneIndex);
+        showScene(sceneIndex);
 
     }
 
 
+    /*
+     * Listen for scrolling.
+     */
     window.addEventListener(
         "scroll",
-        updateCinematicScene,
+        updateCinematic,
         { passive: true }
     );
 
 
+    /*
+     * Recalculate when browser size changes.
+     */
     window.addEventListener(
         "resize",
-        updateCinematicScene
+        updateCinematic
     );
 
 
-    /* Start with Vehicle Tracking */
-    activateScene(0);
+    /*
+     * Start with Vehicle Tracking.
+     */
+    showScene(0);
 
-    updateCinematicScene();
+    updateCinematic();
 
-});
-/* =========================================================
-   AUTOMILE CINEMATIC - FINAL SCROLL ENGINE
-========================================================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const section = document.querySelector(".cinematic-solutions");
-    const scenes = document.querySelectorAll(".cinematic-scene");
-
-    if (!section || scenes.length === 0) {
-        console.log("Cinematic section or scenes not found.");
-        return;
-    }
-
-    console.log("Cinematic system loaded:", scenes.length, "scenes");
-
-
-    /* Make sure the section has enough scrolling space */
-    section.style.height = "600vh";
-    section.style.minHeight = "600vh";
-
-
-    /* Make sure only one scene is visible */
-    scenes.forEach(function (scene, index) {
-
-        scene.style.position = "absolute";
-        scene.style.left = "0";
-        scene.style.top = "0";
-        scene.style.width = "100%";
-
-        scene.style.transition =
-            "opacity 0.7s ease, transform 0.7s ease";
-
-        if (index === 0) {
-
-            scene.style.opacity = "1";
-            scene.style.visibility = "visible";
-            scene.style.transform = "translateY(0)";
-
-        } else {
-
-            scene.style.opacity = "0";
-            scene.style.visibility = "hidden";
-            scene.style.transform = "translateY(40px)";
-
-        }
-
-    });
-
-
-    function showScene(index) {
-
-        scenes.forEach(function (scene, i) {
-
-            if (i === index) {
-
-                scene.style.opacity = "1";
-                scene.style.visibility = "visible";
-                scene.style.transform = "translateY(0)";
-
-            } else {
-
-                scene.style.opacity = "0";
-                scene.style.visibility = "hidden";
-                scene.style.transform = "translateY(40px)";
-
-            }
-
-        });
-
-        console.log("Showing scene:", index + 1);
-
-    }
-
-
-    function updateScenes() {
-
-        const rect = section.getBoundingClientRect();
-
-        const totalScroll =
-            section.offsetHeight - window.innerHeight;
-
-        if (totalScroll <= 0) {
-            return;
-        }
-
-
-        const scrolled =
-            -rect.top;
-
-
-        let progress =
-            scrolled / totalScroll;
-
-
-        progress =
-            Math.max(0, Math.min(1, progress));
-
-
-        let index =
-            Math.floor(progress * scenes.length);
-
-
-        if (index >= scenes.length) {
-            index = scenes.length - 1;
-        }
-
-
-        showScene(index);
-
-    }
-
-
-    window.addEventListener(
-        "scroll",
-        updateScenes,
-        { passive: true }
-    );
-
-
-    window.addEventListener(
-        "resize",
-        updateScenes
-    );
-
-
-    updateScenes();
 
 });
