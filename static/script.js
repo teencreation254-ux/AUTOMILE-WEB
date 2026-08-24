@@ -600,7 +600,7 @@ sections.forEach(section => {
 
 /* =========================================================
    AUTOMILE CINEMATIC SOLUTIONS
-   PREMIUM SCROLL SCENE CONTROL
+   SCROLL CONTROL
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -611,42 +611,30 @@ document.addEventListener("DOMContentLoaded", function () {
     const scenes =
         document.querySelectorAll(".cinematic-scene");
 
-    const video =
-        document.getElementById("solutionsVideo");
-
-
-    if (!cinematicSection || scenes.length === 0) {
-        console.log("AUTOMILE cinematic section not found.");
+    if (!cinematicSection || !scenes.length) {
         return;
     }
 
-
-    /* =========================================
-       ACTIVATE SCENE
-    ========================================= */
 
     function activateScene(index) {
 
         scenes.forEach(function (scene, i) {
 
-            scene.classList.toggle(
-                "active",
-                i === index
-            );
+            if (i === index) {
+                scene.classList.add("active");
+            } else {
+                scene.classList.remove("active");
+            }
 
         });
 
     }
 
 
-    /* =========================================
-       UPDATE SCENE FROM PAGE SCROLL
-    ========================================= */
-
     function updateCinematicScene() {
 
-        const sectionTop =
-            cinematicSection.offsetTop;
+        const rect =
+            cinematicSection.getBoundingClientRect();
 
         const sectionHeight =
             cinematicSection.offsetHeight;
@@ -654,11 +642,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const viewportHeight =
             window.innerHeight;
 
-
-        /*
-         * Total distance available for
-         * the cinematic scroll.
-         */
 
         const scrollDistance =
             sectionHeight - viewportHeight;
@@ -670,122 +653,44 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        /*
-         * How far the user has travelled
-         * inside the cinematic section.
-         */
-
-        const travelled =
-            window.scrollY - sectionTop;
-
-
-        /*
-         * Convert to percentage.
-         */
-
         let progress =
-            travelled / scrollDistance;
+            -rect.top / scrollDistance;
 
-
-        /*
-         * Keep between 0 and 1.
-         */
 
         progress =
-            Math.max(
-                0,
-                Math.min(1, progress)
-            );
+            Math.max(0, Math.min(1, progress));
 
-
-        /*
-         * Six scenes:
-         *
-         * 0 = Vehicle Tracking
-         * 1 = Fleet Management
-         * 2 = Fuel Monitoring
-         * 3 = Dash Cameras
-         * 4 = Speed Limiters
-         * 5 = Asset Tracking
-         */
 
         let sceneIndex =
-            Math.floor(
-                progress * scenes.length
-            );
+            Math.floor(progress * scenes.length);
 
 
         if (sceneIndex >= scenes.length) {
-
-            sceneIndex =
-                scenes.length - 1;
-
+            sceneIndex = scenes.length - 1;
         }
 
 
         activateScene(sceneIndex);
 
-
-        /* =====================================
-           PLAY BACKGROUND VIDEO
-        ===================================== */
-
-        if (video) {
-
-            if (video.paused) {
-
-                video.play().catch(function () {});
-
-            }
-
-        }
-
     }
-
-
-    /* =========================================
-       SCROLL LISTENER
-    ========================================= */
-
-    let ticking = false;
 
 
     window.addEventListener(
         "scroll",
-        function () {
-
-            if (!ticking) {
-
-                window.requestAnimationFrame(function () {
-
-                    updateCinematicScene();
-
-                    ticking = false;
-
-                });
-
-                ticking = true;
-
-            }
-
-        },
+        updateCinematicScene,
         { passive: true }
     );
 
 
-    /* =========================================
-       INITIALIZE
-    ========================================= */
+    window.addEventListener(
+        "resize",
+        updateCinematicScene
+    );
 
+
+    /* Start with Vehicle Tracking */
     activateScene(0);
 
     updateCinematicScene();
-
-
-    console.log(
-        "AUTOMILE cinematic solutions initialized:",
-        scenes.length,
-        "scenes"
-    );
 
 });

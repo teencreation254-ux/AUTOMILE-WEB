@@ -1804,62 +1804,32 @@ font-size:18px;
 }
 /* =========================================================
    AUTOMILE CINEMATIC SOLUTIONS
-   CLEAN PREMIUM VERSION
+   SCROLL-DRIVEN VERSION
 ========================================================= */
 
 .cinematic-solutions {
     position: relative;
     width: 100%;
-    min-height: 100vh;
+    height: 600vh;
+    min-height: 600vh;
     background: #05070b;
     color: #ffffff;
-    overflow: hidden;
+    overflow: visible;
 }
 
 
-/* Background video */
-
-.cinematic-video {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-}
-
-.cinematic-video video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-
-/* Dark cinematic overlay */
-
-.cinematic-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(0, 0, 0, 0.78) 0%,
-            rgba(0, 0, 0, 0.48) 50%,
-            rgba(0, 0, 0, 0.25) 100%
-        );
-}
-
-
-/* Content */
+/* =========================================
+   FIXED/STICKY CINEMATIC CONTENT
+========================================= */
 
 .cinematic-content {
-    position: relative;
-    z-index: 5;
-
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
     min-height: 100vh;
+
+    overflow: hidden;
 
     display: flex;
     flex-direction: column;
@@ -1867,12 +1837,64 @@ font-size:18px;
 
     padding: 100px 8%;
     box-sizing: border-box;
+
+    z-index: 5;
 }
 
 
-/* Heading */
+/* =========================================
+   BACKGROUND VIDEO
+========================================= */
+
+.cinematic-video {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 0;
+}
+
+.cinematic-video video {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    display: block;
+}
+
+
+/* =========================================
+   DARK OVERLAY
+========================================= */
+
+.cinematic-overlay {
+    position: absolute;
+    inset: 0;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,0.78) 0%,
+            rgba(0,0,0,0.48) 50%,
+            rgba(0,0,0,0.25) 100%
+        );
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
 
 .cinematic-heading {
+    position: relative;
+    z-index: 5;
+
     max-width: 720px;
     margin-bottom: 55px;
 }
@@ -1911,7 +1933,9 @@ font-size:18px;
 }
 
 
-/* Solution area */
+/* =========================================
+   SOLUTION SCENES
+========================================= */
 
 .solution-scenes {
     position: relative;
@@ -1920,10 +1944,14 @@ font-size:18px;
     max-width: 680px;
 
     min-height: 220px;
+
+    z-index: 10;
 }
 
 
-/* Individual scenes */
+/* =========================================
+   INDIVIDUAL SCENES
+========================================= */
 
 .cinematic-scene {
     position: absolute;
@@ -1936,26 +1964,34 @@ font-size:18px;
     opacity: 0;
     visibility: hidden;
 
-    transform: translateY(35px);
+    transform: translateY(40px);
 
     transition:
-        opacity 0.75s ease,
-        transform 0.75s ease,
-        visibility 0.75s ease;
+        opacity 0.7s ease,
+        transform 0.7s ease,
+        visibility 0.7s ease;
+
+    z-index: 1;
 }
 
 
-/* Active scene */
+/* =========================================
+   ACTIVE SCENE
+========================================= */
 
 .cinematic-scene.active {
     opacity: 1;
     visibility: visible;
 
     transform: translateY(0);
+
+    z-index: 5;
 }
 
 
-/* Scene number */
+/* =========================================
+   SCENE NUMBER
+========================================= */
 
 .scene-number {
     margin-bottom: 14px;
@@ -1972,7 +2008,9 @@ font-size:18px;
 }
 
 
-/* Scene title */
+/* =========================================
+   SCENE TITLE
+========================================= */
 
 .cinematic-scene h3 {
     margin: 0 0 12px;
@@ -1984,7 +2022,9 @@ font-size:18px;
 }
 
 
-/* Scene description */
+/* =========================================
+   SCENE DESCRIPTION
+========================================= */
 
 .cinematic-scene p {
     max-width: 520px;
@@ -1998,7 +2038,9 @@ font-size:18px;
 }
 
 
-/* Scroll indicator */
+/* =========================================
+   SCROLL INDICATOR
+========================================= */
 
 .cinematic-scroll {
     position: absolute;
@@ -2011,7 +2053,7 @@ font-size:18px;
 
     gap: 18px;
 
-    z-index: 8;
+    z-index: 20;
 
     font-size: 10px;
     font-weight: 700;
@@ -2025,12 +2067,12 @@ font-size:18px;
     height: 1px;
 
     background: rgba(255,255,255,0.6);
-
-    overflow: hidden;
 }
 
 
-/* Mobile */
+/* =========================================
+   MOBILE
+========================================= */
 
 @media (max-width: 768px) {
 
@@ -2063,61 +2105,4 @@ font-size:18px;
         bottom: 28px;
     }
 
-}
-/* =========================================================
-   AUTOMILE CINEMATIC SCROLL STRUCTURE
-========================================================= */
-
-.cinematic-solutions {
-    position: relative !important;
-    min-height: 600vh !important;
-    height: 600vh !important;
-    overflow: visible !important;
-}
-
-
-.cinematic-content {
-    position: sticky !important;
-    top: 0 !important;
-
-    height: 100vh !important;
-    min-height: 100vh !important;
-
-    overflow: hidden !important;
-
-    box-sizing: border-box;
-}
-
-
-.solution-scenes {
-    position: relative !important;
-    min-height: 220px !important;
-}
-
-
-.cinematic-scene {
-    position: absolute !important;
-
-    left: 0 !important;
-    top: 0 !important;
-
-    width: 100% !important;
-
-    opacity: 0 !important;
-    visibility: hidden !important;
-
-    transform: translateY(35px) !important;
-
-    transition:
-        opacity 0.75s ease,
-        transform 0.75s ease,
-        visibility 0.75s ease !important;
-}
-
-
-.cinematic-scene.active {
-    opacity: 1 !important;
-    visibility: visible !important;
-
-    transform: translateY(0) !important;
 }
