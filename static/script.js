@@ -547,161 +547,63 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-
 /* =========================================================
    AUTOMILE CINEMATIC SOLUTIONS
-   6 SCENE SCROLL SYSTEM
+   PREMIUM AUTO TRANSITION
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const section =
-        document.querySelector(".cinematic-solutions");
+    const scenes = document.querySelectorAll(".cinematic-scene");
 
-    const scenes =
-        document.querySelectorAll(".cinematic-scene");
-
-    if (!section || scenes.length === 0) {
-
-        console.log(
-            "AUTOMILE: Cinematic section/scenes not found."
-        );
-
+    if (!scenes.length) {
+        console.log("Cinematic scenes not found.");
         return;
     }
 
-
-    console.log(
-        "AUTOMILE: Found",
-        scenes.length,
-        "cinematic scenes."
-    );
-
-
-    /* =========================================
-       SHOW ONE SCENE
-    ========================================= */
+    let currentScene = 0;
+    let transitionTimer;
 
     function showScene(index) {
 
         scenes.forEach(function (scene, i) {
 
             if (i === index) {
-
                 scene.classList.add("active");
-
             } else {
-
                 scene.classList.remove("active");
-
             }
 
         });
 
-        console.log(
-            "AUTOMILE: Showing scene",
-            index + 1,
-            "of",
-            scenes.length
-        );
-
+        console.log("Showing scene:", index + 1);
     }
 
 
-    /* =========================================
-       CALCULATE SCROLL PROGRESS
-    ========================================= */
+    function nextScene() {
 
-    function updateScenes() {
+        currentScene++;
 
-        const rect =
-            section.getBoundingClientRect();
-
-        const sectionHeight =
-            section.offsetHeight;
-
-        const viewportHeight =
-            window.innerHeight;
-
-
-        const scrollDistance =
-            sectionHeight - viewportHeight;
-
-
-        if (scrollDistance <= 0) {
-
-            showScene(0);
-
-            return;
+        if (currentScene >= scenes.length) {
+            currentScene = 0;
         }
 
-
-        const scrolled =
-            -rect.top;
-
-
-        let progress =
-            scrolled / scrollDistance;
-
-
-        progress =
-            Math.max(
-                0,
-                Math.min(1, progress)
-            );
-
-
-        let sceneIndex =
-            Math.floor(
-                progress * scenes.length
-            );
-
-
-        if (sceneIndex >= scenes.length) {
-
-            sceneIndex =
-                scenes.length - 1;
-
-        }
-
-
-        showScene(sceneIndex);
-
+        showScene(currentScene);
     }
 
 
-    /* =========================================
-       INITIAL SCENE
-    ========================================= */
+    /* Start with Vehicle Tracking */
 
     showScene(0);
 
 
-    /* =========================================
-       SCROLL
-    ========================================= */
+    /* Automatic premium transition */
 
-    window.addEventListener(
-        "scroll",
-        updateScenes,
-        { passive: true }
-    );
+    transitionTimer = setInterval(function () {
 
+        nextScene();
 
-    /* =========================================
-       RESIZE
-    ========================================= */
+    }, 5000);
 
-    window.addEventListener(
-        "resize",
-        updateScenes
-    );
-
-
-    /* =========================================
-       INITIAL CALCULATION
-    ========================================= */
-
-    updateScenes();
 
 });
