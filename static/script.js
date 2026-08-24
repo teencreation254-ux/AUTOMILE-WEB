@@ -694,3 +694,132 @@ document.addEventListener("DOMContentLoaded", function () {
     updateCinematicScene();
 
 });
+/* =========================================================
+   AUTOMILE CINEMATIC - FINAL SCROLL ENGINE
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const section = document.querySelector(".cinematic-solutions");
+    const scenes = document.querySelectorAll(".cinematic-scene");
+
+    if (!section || scenes.length === 0) {
+        console.log("Cinematic section or scenes not found.");
+        return;
+    }
+
+    console.log("Cinematic system loaded:", scenes.length, "scenes");
+
+
+    /* Make sure the section has enough scrolling space */
+    section.style.height = "600vh";
+    section.style.minHeight = "600vh";
+
+
+    /* Make sure only one scene is visible */
+    scenes.forEach(function (scene, index) {
+
+        scene.style.position = "absolute";
+        scene.style.left = "0";
+        scene.style.top = "0";
+        scene.style.width = "100%";
+
+        scene.style.transition =
+            "opacity 0.7s ease, transform 0.7s ease";
+
+        if (index === 0) {
+
+            scene.style.opacity = "1";
+            scene.style.visibility = "visible";
+            scene.style.transform = "translateY(0)";
+
+        } else {
+
+            scene.style.opacity = "0";
+            scene.style.visibility = "hidden";
+            scene.style.transform = "translateY(40px)";
+
+        }
+
+    });
+
+
+    function showScene(index) {
+
+        scenes.forEach(function (scene, i) {
+
+            if (i === index) {
+
+                scene.style.opacity = "1";
+                scene.style.visibility = "visible";
+                scene.style.transform = "translateY(0)";
+
+            } else {
+
+                scene.style.opacity = "0";
+                scene.style.visibility = "hidden";
+                scene.style.transform = "translateY(40px)";
+
+            }
+
+        });
+
+        console.log("Showing scene:", index + 1);
+
+    }
+
+
+    function updateScenes() {
+
+        const rect = section.getBoundingClientRect();
+
+        const totalScroll =
+            section.offsetHeight - window.innerHeight;
+
+        if (totalScroll <= 0) {
+            return;
+        }
+
+
+        const scrolled =
+            -rect.top;
+
+
+        let progress =
+            scrolled / totalScroll;
+
+
+        progress =
+            Math.max(0, Math.min(1, progress));
+
+
+        let index =
+            Math.floor(progress * scenes.length);
+
+
+        if (index >= scenes.length) {
+            index = scenes.length - 1;
+        }
+
+
+        showScene(index);
+
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        updateScenes,
+        { passive: true }
+    );
+
+
+    window.addEventListener(
+        "resize",
+        updateScenes
+    );
+
+
+    updateScenes();
+
+});
