@@ -547,27 +547,40 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
-/* =========================================================
-   AUTOMILE CINEMATIC SOLUTIONS
-   STEP 3 — SCROLL CONTROL
-========================================================= */
+/// Fade in normal sections as you scroll
+// Cinematic Solutions is intentionally excluded.
 
-document.addEventListener("DOMContentLoaded", function () {
+const sections = document.querySelectorAll(
+    "section:not(.cinematic-solutions)"
+);
 
-    const cinematicSection =
-        document.querySelector(".cinematic-solutions");
+const observer = new IntersectionObserver((entries) => {
 
-    const scenes =
-        document.querySelectorAll(".cinematic-scene");
+    entries.forEach(entry => {
 
-    const video =
-        document.getElementById("solutionsVideo");
+        if (entry.isIntersecting) {
 
-    if (!cinematicSection || !scenes.length) {
-        return;
-    }
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+
+        }
+
+    });
+
+}, {
+    threshold: 0.2
+});
 
 
+sections.forEach(section => {
+
+    section.style.opacity = "0";
+    section.style.transform = "translateY(40px)";
+    section.style.transition = "all 0.8s ease";
+
+    observer.observe(section);
+
+});
     /* =========================================
        SCENE CONTROL
     ========================================= */
@@ -586,11 +599,80 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+/* =========================================================
+   AUTOMILE CINEMATIC SOLUTIONS
+   PREMIUM SCROLL TRANSITIONS
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const cinematicSection =
+        document.querySelector(".cinematic-solutions");
+
+    const cinematicContent =
+        document.querySelector(".cinematic-content");
+
+    const scenes =
+        document.querySelectorAll(".cinematic-scene");
+
+    const video =
+        document.getElementById("solutionsVideo");
+
+
+    if (
+        !cinematicSection ||
+        !cinematicContent ||
+        !scenes.length
+    ) {
+        return;
+    }
+
+
     /* =========================================
-       SCROLL POSITION
+       MAKE THE SECTION LONG ENOUGH FOR SCROLL
     ========================================= */
 
-    function updateCinematicScene() {
+    cinematicSection.style.minHeight =
+        (scenes.length * 100) + "vh";
+
+
+    /* =========================================
+       STICK THE CINEMATIC CONTENT
+    ========================================= */
+
+    cinematicContent.style.position = "sticky";
+    cinematicContent.style.top = "0";
+    cinematicContent.style.height = "100vh";
+
+
+    /* =========================================
+       ACTIVATE SCENE
+    ========================================= */
+
+    function activateScene(index) {
+
+        scenes.forEach(function (scene, i) {
+
+            if (i === index) {
+
+                scene.classList.add("active");
+
+            } else {
+
+                scene.classList.remove("active");
+
+            }
+
+        });
+
+    }
+
+
+    /* =========================================
+       UPDATE WHILE SCROLLING
+    ========================================= */
+
+    function updateCinematic() {
 
         const rect =
             cinematicSection.getBoundingClientRect();
@@ -602,31 +684,24 @@ document.addEventListener("DOMContentLoaded", function () {
             window.innerHeight;
 
 
-        /*
-         * Calculate how far the visitor has
-         * travelled through the section.
-         */
-
-        const travelled =
-            -rect.top;
-
-
-        const scrollRange =
+        const scrollDistance =
             sectionHeight - viewportHeight;
 
 
-        if (scrollRange <= 0) {
+        if (scrollDistance <= 0) {
+            activateScene(0);
             return;
         }
 
 
-        let progress =
-            travelled / scrollRange;
-
-
         /*
-         * Keep progress between 0 and 1.
+         * How far the visitor has travelled
+         * through the cinematic section.
          */
+
+        let progress =
+            (-rect.top) / scrollDistance;
+
 
         progress =
             Math.max(
@@ -636,8 +711,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /*
-         * Convert scroll progress
-         * into one of the six scenes.
+         * Convert scroll position into
+         * one of the six solutions.
          */
 
         let sceneIndex =
@@ -646,12 +721,11 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-        /*
-         * Prevent an index of 6.
-         */
-
         if (sceneIndex >= scenes.length) {
-            sceneIndex = scenes.length - 1;
+
+            sceneIndex =
+                scenes.length - 1;
+
         }
 
 
@@ -659,19 +733,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /* =====================================
-           VIDEO CONTROL
+           KEEP VIDEO PLAYING
         ===================================== */
 
-        if (video && video.readyState >= 2) {
-
-            /*
-             * The video remains smooth while
-             * scrolling rather than restarting.
-             */
+        if (video) {
 
             if (video.paused) {
 
-                video.play().catch(() => {});
+                video.play().catch(function () {});
 
             }
 
@@ -681,10 +750,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================
-       SCROLL LISTENER
+       SMOOTH SCROLL PERFORMANCE
     ========================================= */
 
     let ticking = false;
+
 
     window.addEventListener(
         "scroll",
@@ -695,7 +765,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 window.requestAnimationFrame(
                     function () {
 
-                        updateCinematicScene();
+                        updateCinematic();
 
                         ticking = false;
 
@@ -707,7 +777,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
         },
-        { passive: true }
+        {
+            passive: true
+        }
     );
 
 
@@ -717,7 +789,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     activateScene(0);
 
-    updateCinematicScene();
-
+    updateCinematic();
 
 });
