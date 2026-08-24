@@ -1910,3 +1910,46 @@ font-size:18px;
     visibility: visible;
     transform: none;
 }
+/* =========================================
+   AUTOMILE CINEMATIC — VISIBILITY FIX
+========================================= */
+
+/* Keep the section itself behind the content */
+.cinematic-solutions {
+    position: relative;
+    z-index: 1;
+}
+
+/* Video stays at the back */
+.cinematic-video {
+    z-index: 1;
+}
+
+/* Dark overlay stays ABOVE video */
+.cinematic-overlay {
+    z-index: 2;
+}
+
+/* IMPORTANT:
+   Keep the website content ABOVE the overlay */
+.cinematic-content {
+    position: relative;
+    z-index: 10 !important;
+}
+
+/* Keep the scene text visible */
+.cinematic-scene {
+    z-index: 11;
+}
+
+/* Active scene */
+.cinematic-scene.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Keep scroll indicator visible */
+.cinematic-scroll {
+    z-index: 12;
+}
