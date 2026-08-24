@@ -987,3 +987,421 @@ font-size:18px;
     }
 
 }
+/* =========================================================
+   AUTOMILE — PREMIUM PAYMENT DETAILS
+========================================================= */
+
+.payment-section {
+    position: relative;
+    padding: 100px 7%;
+    background: #f6f8fc;
+    overflow: hidden;
+}
+
+.payment-section::before {
+    content: "";
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    background: rgba(0, 72, 145, 0.05);
+    top: -180px;
+    right: -140px;
+    pointer-events: none;
+}
+
+.payment-section::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: rgba(0, 72, 145, 0.035);
+    bottom: -150px;
+    left: -100px;
+    pointer-events: none;
+}
+
+.payment-container {
+    position: relative;
+    z-index: 2;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.payment-heading {
+    max-width: 700px;
+    margin: 0 auto 55px;
+    text-align: center;
+}
+
+.payment-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 16px;
+    color: #0056a6;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+}
+
+.payment-eyebrow i {
+    font-size: 13px;
+}
+
+.payment-heading h2 {
+    margin: 0 0 16px;
+    color: #092c52;
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 800;
+    line-height: 1.15;
+}
+
+.payment-heading p {
+    margin: 0;
+    color: #68778a;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+
+/* =========================
+   PAYMENT GRID
+========================= */
+
+.payment-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+}
+
+.payment-card {
+    position: relative;
+    padding: 38px;
+    background: #ffffff;
+    border: 1px solid #e5eaf1;
+    border-radius: 22px;
+    box-shadow: 0 12px 40px rgba(14, 42, 74, 0.07);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    overflow: hidden;
+}
+
+.payment-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 22px 55px rgba(14, 42, 74, 0.13);
+}
+
+.payment-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #0056a6;
+}
+
+.mpesa-card::after {
+    background: #087f3d;
+}
+
+.payment-card-top {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid #edf0f4;
+}
+
+.payment-icon {
+    width: 58px;
+    height: 58px;
+    flex: 0 0 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    background: rgba(0, 86, 166, 0.09);
+    color: #0056a6;
+    font-size: 23px;
+}
+
+.mpesa-icon {
+    background: rgba(8, 127, 61, 0.1);
+    color: #087f3d;
+}
+
+.payment-label {
+    display: block;
+    margin-bottom: 6px;
+    color: #7b8796;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+}
+
+.payment-card-top h3 {
+    margin: 0;
+    color: #102f50;
+    font-size: 21px;
+    font-weight: 750;
+}
+
+
+/* =========================
+   PAYMENT INFORMATION
+========================= */
+
+.payment-details-list {
+    padding-top: 8px;
+}
+
+.payment-row {
+    padding: 17px 0;
+    border-bottom: 1px solid #edf0f4;
+}
+
+.payment-row:last-child {
+    border-bottom: none;
+}
+
+.payment-row-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.payment-row span {
+    color: #7a8795;
+    font-size: 13px;
+}
+
+.payment-row strong {
+    color: #172f49;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: right;
+}
+
+.copy-value {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+
+/* =========================
+   COPY BUTTON
+========================= */
+
+.copy-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 8px 12px;
+    border: 1px solid #dce4ed;
+    border-radius: 8px;
+    background: #f7f9fc;
+    color: #31516f;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.copy-btn:hover {
+    border-color: #0056a6;
+    background: #0056a6;
+    color: #ffffff;
+}
+
+.copy-btn i {
+    font-size: 11px;
+}
+
+
+/* =========================
+   M-PESA FEATURE AREA
+========================= */
+
+.mpesa-payment-main {
+    margin: 28px 0 20px;
+    padding: 25px;
+    border-radius: 16px;
+    background: linear-gradient(
+        135deg,
+        #f0faf5,
+        #f8fcfa
+    );
+    border: 1px solid #dcefe5;
+}
+
+.mpesa-caption {
+    display: block;
+    margin-bottom: 8px;
+    color: #668074;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+}
+
+.mpesa-number {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.mpesa-number strong {
+    color: #087f3d;
+    font-size: clamp(30px, 4vw, 42px);
+    letter-spacing: 2px;
+}
+
+.mpesa-account {
+    padding-top: 10px;
+}
+
+.payment-instruction {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 20px;
+    padding: 16px;
+    border-radius: 12px;
+    background: #f7f9fc;
+}
+
+.payment-instruction i {
+    margin-top: 3px;
+    color: #0056a6;
+}
+
+.payment-instruction p {
+    margin: 0;
+    color: #6d7b8b;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.payment-instruction strong {
+    color: #172f49;
+}
+
+
+/* =========================
+   IMPORTANT NOTICE
+========================= */
+
+.payment-notice {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    max-width: 850px;
+    margin: 35px auto 0;
+    padding: 18px 22px;
+    border: 1px solid #e2e8ef;
+    border-radius: 13px;
+    background: rgba(255, 255, 255, 0.75);
+}
+
+.payment-notice > i {
+    color: #0056a6;
+    font-size: 18px;
+}
+
+.payment-notice p {
+    margin: 0;
+    color: #687789;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.payment-notice strong {
+    color: #1b334d;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 850px) {
+
+    .payment-section {
+        padding: 75px 5%;
+    }
+
+    .payment-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .payment-card {
+        padding: 30px;
+    }
+}
+
+
+@media (max-width: 560px) {
+
+    .payment-section {
+        padding: 65px 20px;
+    }
+
+    .payment-heading {
+        margin-bottom: 38px;
+    }
+
+    .payment-card {
+        padding: 24px 20px;
+        border-radius: 17px;
+    }
+
+    .payment-card-top {
+        gap: 13px;
+    }
+
+    .payment-icon {
+        width: 50px;
+        height: 50px;
+        flex-basis: 50px;
+        font-size: 20px;
+    }
+
+    .payment-card-top h3 {
+        font-size: 18px;
+    }
+
+    .payment-row-content {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 7px;
+    }
+
+    .payment-row strong {
+        text-align: left;
+    }
+
+    .copy-value {
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    .mpesa-number {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .mpesa-number strong {
+        font-size: 34px;
+    }
+
+    .payment-notice {
+        align-items: flex-start;
+    }
+}
