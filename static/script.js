@@ -598,19 +598,15 @@ sections.forEach(section => {
 
     }
 
-
 /* =========================================================
    AUTOMILE CINEMATIC SOLUTIONS
-   PREMIUM SCROLL TRANSITIONS
+   PREMIUM SCROLL SCENE CONTROL
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
 
     const cinematicSection =
         document.querySelector(".cinematic-solutions");
-
-    const cinematicContent =
-        document.querySelector(".cinematic-content");
 
     const scenes =
         document.querySelectorAll(".cinematic-scene");
@@ -619,34 +615,14 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("solutionsVideo");
 
 
-    if (
-        !cinematicSection ||
-        !cinematicContent ||
-        !scenes.length
-    ) {
+    // Stop if the cinematic section is not on the page
+    if (!cinematicSection || scenes.length === 0) {
         return;
     }
 
 
     /* =========================================
-       MAKE THE SECTION LONG ENOUGH FOR SCROLL
-    ========================================= */
-
-    cinematicSection.style.minHeight =
-        (scenes.length * 100) + "vh";
-
-
-    /* =========================================
-       STICK THE CINEMATIC CONTENT
-    ========================================= */
-
-    cinematicContent.style.position = "sticky";
-    cinematicContent.style.top = "0";
-    cinematicContent.style.height = "100vh";
-
-
-    /* =========================================
-       ACTIVATE SCENE
+       ACTIVATE ONE SCENE
     ========================================= */
 
     function activateScene(index) {
@@ -669,13 +645,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================
-       UPDATE WHILE SCROLLING
+       CALCULATE SCROLL PROGRESS
     ========================================= */
 
-    function updateCinematic() {
+    function updateCinematicScene() {
 
         const rect =
             cinematicSection.getBoundingClientRect();
+
+        const sectionTop =
+            rect.top;
 
         const sectionHeight =
             cinematicSection.offsetHeight;
@@ -683,6 +662,11 @@ document.addEventListener("DOMContentLoaded", function () {
         const viewportHeight =
             window.innerHeight;
 
+
+        /*
+         * How much of the cinematic section
+         * is available for scrolling.
+         */
 
         const scrollDistance =
             sectionHeight - viewportHeight;
@@ -695,13 +679,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /*
-         * How far the visitor has travelled
-         * through the cinematic section.
+         * Current scroll position inside
+         * the cinematic section.
          */
 
         let progress =
-            (-rect.top) / scrollDistance;
+            -sectionTop / scrollDistance;
 
+
+        /*
+         * Keep progress between 0 and 1.
+         */
 
         progress =
             Math.max(
@@ -711,8 +699,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /*
-         * Convert scroll position into
-         * one of the six solutions.
+         * Convert scroll progress into
+         * one of the six scenes.
          */
 
         let sceneIndex =
@@ -720,6 +708,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 progress * scenes.length
             );
 
+
+        /*
+         * Make sure the last scene
+         * remains scene 06.
+         */
 
         if (sceneIndex >= scenes.length) {
 
@@ -733,7 +726,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /* =====================================
-           KEEP VIDEO PLAYING
+           VIDEO
         ===================================== */
 
         if (video) {
@@ -762,33 +755,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (!ticking) {
 
-                window.requestAnimationFrame(
-                    function () {
+                window.requestAnimationFrame(function () {
 
-                        updateCinematic();
+                    updateCinematicScene();
 
-                        ticking = false;
+                    ticking = false;
 
-                    }
-                );
+                });
 
                 ticking = true;
 
             }
 
         },
-        {
-            passive: true
-        }
+        { passive: true }
     );
 
 
     /* =========================================
-       INITIAL STATE
+       INITIAL SCENE
     ========================================= */
 
     activateScene(0);
 
-    updateCinematic();
+    updateCinematicScene();
+
 
 });
