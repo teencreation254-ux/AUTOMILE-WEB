@@ -414,3 +414,136 @@ document.addEventListener("click", function(event) {
     }
 
 });
+/* =========================================================
+   AUTOMILE — PREMIUM PAYMENT INTERACTIONS
+========================================================= */
+
+function copyPaymentDetail(value, button) {
+
+    if (!navigator.clipboard) {
+        fallbackCopyPaymentDetail(value, button);
+        return;
+    }
+
+    navigator.clipboard.writeText(value)
+        .then(() => {
+
+            showCopySuccess(button);
+
+        })
+        .catch(() => {
+
+            fallbackCopyPaymentDetail(value, button);
+
+        });
+}
+
+
+/* =========================
+   FALLBACK COPY METHOD
+========================= */
+
+function fallbackCopyPaymentDetail(value, button) {
+
+    const textArea = document.createElement("textarea");
+
+    textArea.value = value;
+
+    textArea.style.position = "fixed";
+    textArea.style.opacity = "0";
+    textArea.style.pointerEvents = "none";
+
+    document.body.appendChild(textArea);
+
+    textArea.focus();
+    textArea.select();
+
+    try {
+
+        document.execCommand("copy");
+
+        showCopySuccess(button);
+
+    } catch (error) {
+
+        console.error("Unable to copy payment detail:", error);
+
+    }
+
+    document.body.removeChild(textArea);
+}
+
+
+/* =========================
+   COPY SUCCESS FEEDBACK
+========================= */
+
+function showCopySuccess(button) {
+
+    if (!button) return;
+
+    const originalHTML = button.innerHTML;
+
+    button.innerHTML =
+        '<i class="fas fa-check"></i><span>Copied</span>';
+
+    button.classList.add("copied");
+
+    button.style.pointerEvents = "none";
+
+    setTimeout(() => {
+
+        button.innerHTML = originalHTML;
+
+        button.classList.remove("copied");
+
+        button.style.pointerEvents = "";
+
+    }, 1800);
+}
+
+
+/* =========================
+   PAYMENT CARD REVEAL
+========================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const paymentCards =
+        document.querySelectorAll(".payment-card");
+
+    if (!paymentCards.length) return;
+
+    const observer =
+        new IntersectionObserver(
+            (entries, observer) => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add(
+                            "payment-visible"
+                        );
+
+                        observer.unobserve(entry.target);
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.15
+            }
+        );
+
+    paymentCards.forEach(card => {
+
+        card.classList.add("payment-hidden");
+
+        observer.observe(card);
+
+    });
+
+});
