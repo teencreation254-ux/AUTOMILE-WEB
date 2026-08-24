@@ -1,6 +1,6 @@
-// Fade in sections as you scroll
-const sections = document.querySelectorAll("section");
-
+const sections = document.querySelectorAll(
+    "section:not(.cinematic-solutions)"
+);
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -502,7 +502,6 @@ function showCopySuccess(button) {
     }, 1800);
 }
 
-
 /* =========================
    PAYMENT CARD REVEAL
 ========================= */
@@ -514,7 +513,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!paymentCards.length) return;
 
-    const observer =
+    const paymentObserver =
         new IntersectionObserver(
             (entries, observer) => {
 
@@ -542,94 +541,167 @@ document.addEventListener("DOMContentLoaded", function () {
 
         card.classList.add("payment-hidden");
 
-        observer.observe(card);
+        paymentObserver.observe(card);
 
     });
- /* =========================================================
+
+});
+
+
+/* =========================================================
    AUTOMILE CINEMATIC SOLUTIONS
-   6 SCENE SCROLL
+   6 SCENE SCROLL SYSTEM
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const section = document.querySelector(".cinematic-solutions");
-    const scenes = document.querySelectorAll(".cinematic-scene");
+    const section =
+        document.querySelector(".cinematic-solutions");
+
+    const scenes =
+        document.querySelectorAll(".cinematic-scene");
 
     if (!section || scenes.length === 0) {
-        console.log("Cinematic section/scenes not found");
+
+        console.log(
+            "AUTOMILE: Cinematic section/scenes not found."
+        );
+
         return;
     }
 
-    console.log("FOUND SCENES:", scenes.length);
+
+    console.log(
+        "AUTOMILE: Found",
+        scenes.length,
+        "cinematic scenes."
+    );
+
+
+    /* =========================================
+       SHOW ONE SCENE
+    ========================================= */
 
     function showScene(index) {
 
-        scenes.forEach((scene, i) => {
-
-            scene.classList.remove("active");
+        scenes.forEach(function (scene, i) {
 
             if (i === index) {
+
                 scene.classList.add("active");
+
+            } else {
+
+                scene.classList.remove("active");
+
             }
 
         });
 
-        console.log("ACTIVE SCENE:", index + 1);
+        console.log(
+            "AUTOMILE: Showing scene",
+            index + 1,
+            "of",
+            scenes.length
+        );
+
     }
 
 
-    function handleScroll() {
+    /* =========================================
+       CALCULATE SCROLL PROGRESS
+    ========================================= */
 
-        const rect = section.getBoundingClientRect();
+    function updateScenes() {
 
-        const sectionTop = rect.top;
+        const rect =
+            section.getBoundingClientRect();
 
-        const sectionHeight = section.offsetHeight;
+        const sectionHeight =
+            section.offsetHeight;
 
-        const viewportHeight = window.innerHeight;
+        const viewportHeight =
+            window.innerHeight;
 
-        const scrollableDistance =
+
+        const scrollDistance =
             sectionHeight - viewportHeight;
 
-        if (scrollableDistance <= 0) {
+
+        if (scrollDistance <= 0) {
+
             showScene(0);
+
             return;
         }
 
-        let progress =
-            (-sectionTop) / scrollableDistance;
 
-        progress = Math.max(0, Math.min(1, progress));
+        const scrolled =
+            -rect.top;
+
+
+        let progress =
+            scrolled / scrollDistance;
+
+
+        progress =
+            Math.max(
+                0,
+                Math.min(1, progress)
+            );
+
 
         let sceneIndex =
-            Math.floor(progress * scenes.length);
+            Math.floor(
+                progress * scenes.length
+            );
+
 
         if (sceneIndex >= scenes.length) {
-            sceneIndex = scenes.length - 1;
+
+            sceneIndex =
+                scenes.length - 1;
+
         }
 
+
         showScene(sceneIndex);
+
     }
 
 
-    /* Start with Vehicle Tracking */
+    /* =========================================
+       INITIAL SCENE
+    ========================================= */
 
     showScene(0);
 
 
+    /* =========================================
+       SCROLL
+    ========================================= */
+
     window.addEventListener(
         "scroll",
-        handleScroll,
+        updateScenes,
         { passive: true }
     );
 
 
+    /* =========================================
+       RESIZE
+    ========================================= */
+
     window.addEventListener(
         "resize",
-        handleScroll
+        updateScenes
     );
 
 
-    handleScroll();
+    /* =========================================
+       INITIAL CALCULATION
+    ========================================= */
+
+    updateScenes();
 
 });
