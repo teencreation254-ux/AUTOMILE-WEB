@@ -583,7 +583,7 @@ sections.forEach(section => {
 });
  /* =========================================================
    AUTOMILE CINEMATIC SOLUTIONS
-   FINAL SCROLL CONTROL
+   SINGLE SCROLL ENGINE
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -592,111 +592,79 @@ document.addEventListener("DOMContentLoaded", function () {
     const scenes = document.querySelectorAll(".cinematic-scene");
 
     if (!section || scenes.length === 0) {
-        console.log("Cinematic section not found.");
+        console.log("Cinematic section or scenes not found.");
         return;
     }
 
-    console.log("AUTOMILE CINEMATIC: 6 scenes detected");
+    console.log("Cinematic scenes found:", scenes.length);
 
 
-    /*
-     * Give the cinematic section enough
-     * vertical space for all 6 scenes.
-     */
-    section.style.height = "600vh";
-    section.style.minHeight = "600vh";
-
-
-    /*
-     * Show the selected scene.
-     */
     function showScene(index) {
 
         scenes.forEach(function (scene, i) {
 
             if (i === index) {
-
-                scene.style.opacity = "1";
-                scene.style.visibility = "visible";
-                scene.style.transform = "translateY(0)";
-                scene.style.zIndex = "5";
-
+                scene.classList.add("active");
             } else {
-
-                scene.style.opacity = "0";
-                scene.style.visibility = "hidden";
-                scene.style.transform = "translateY(35px)";
-                scene.style.zIndex = "1";
-
+                scene.classList.remove("active");
             }
 
         });
 
+        console.log("Showing scene:", index + 1);
     }
 
 
-    /*
-     * Calculate which scene should be visible.
-     */
-    function updateCinematic() {
+    function updateScenes() {
 
         const rect = section.getBoundingClientRect();
 
-        const scrollableDistance =
+        const totalScroll =
             section.offsetHeight - window.innerHeight;
 
-        if (scrollableDistance <= 0) {
+        if (totalScroll <= 0) {
+            showScene(0);
             return;
         }
 
+        const scrollPosition = -rect.top;
 
         let progress =
-            (-rect.top) / scrollableDistance;
+            scrollPosition / totalScroll;
+
+        progress = Math.max(0, Math.min(1, progress));
 
 
-        progress =
-            Math.max(0, Math.min(1, progress));
-
-
-        let sceneIndex =
+        let index =
             Math.floor(progress * scenes.length);
 
 
-        if (sceneIndex >= scenes.length) {
-            sceneIndex = scenes.length - 1;
+        if (index >= scenes.length) {
+            index = scenes.length - 1;
         }
 
 
-        showScene(sceneIndex);
-
+        showScene(index);
     }
 
 
-    /*
-     * Listen for scrolling.
-     */
+    // Start with Vehicle Tracking
+    showScene(0);
+
+    // Update while scrolling
     window.addEventListener(
         "scroll",
-        updateCinematic,
+        updateScenes,
         { passive: true }
     );
 
-
-    /*
-     * Recalculate when browser size changes.
-     */
+    // Update if window size changes
     window.addEventListener(
         "resize",
-        updateCinematic
+        updateScenes
     );
 
-
-    /*
-     * Start with Vehicle Tracking.
-     */
-    showScene(0);
-
-    updateCinematic();
-
+    // Run once immediately
+    updateScenes();
 
 });
