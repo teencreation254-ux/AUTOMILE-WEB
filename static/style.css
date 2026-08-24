@@ -1802,3 +1802,105 @@ font-size:18px;
     }
 
 }
+/* =========================================================
+   AUTOMILE CINEMATIC SOLUTIONS
+   SCROLL-DRIVEN SECTION
+========================================================= */
+
+.cinematic-solutions {
+    position: relative;
+    height: 600vh;
+    background: #05070b;
+}
+
+.cinematic-solutions-inner {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+/* Keep all scenes in the same position */
+
+.cinematic-scene {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(35px);
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease,
+        visibility 0.8s ease;
+    z-index: 1;
+}
+
+
+/* Active scene */
+
+.cinematic-scene.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    z-index: 2;
+}
+
+
+/* Cinematic dark overlay */
+
+.cinematic-solutions::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,0.72) 0%,
+            rgba(0,0,0,0.38) 55%,
+            rgba(0,0,0,0.15) 100%
+        );
+    z-index: 3;
+}
+
+
+/* Keep the text above the overlay */
+
+.cinematic-scene .scene-content {
+    position: relative;
+    z-index: 5;
+}
+
+
+/* Smooth typography */
+
+.cinematic-scene h2 {
+    transition:
+        transform 0.8s ease,
+        opacity 0.8s ease;
+}
+
+.cinematic-scene p {
+    transition:
+        transform 0.9s ease,
+        opacity 0.9s ease;
+}
+
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .cinematic-solutions {
+        height: 600vh;
+    }
+
+    .cinematic-scene {
+        padding: 30px;
+    }
+
+}
