@@ -547,7 +547,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 /* =========================================================
-   AUTOMILE PREMIUM CINEMATIC SOLUTIONS
+   AUTOMILE PREMIUM SOLUTIONS
    AUTOMATIC 6-SCENE TRANSITION
 ========================================================= */
 
@@ -570,18 +570,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         });
 
-        console.log("Showing scene:", index + 1);
-
+        console.log("Showing solution:", index + 1);
     }
 
-    /* Start with Scene 01 */
 
-    showScene(0);
-
-
-    /* Automatically move through all 6 scenes */
-
-    setInterval(function () {
+    function nextScene() {
 
         currentScene++;
 
@@ -591,6 +584,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         showScene(currentScene);
 
-    }, 6000);
+    }
+
+
+    // Start with Vehicle Tracking
+    showScene(0);
+
+
+    // Automatically change every 6 seconds
+    setInterval(nextScene, 6000);
 
 });
