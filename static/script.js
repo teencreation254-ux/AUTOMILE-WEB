@@ -547,16 +547,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 /* =========================================================
-   AUTOMILE PREMIUM SOLUTIONS
-   AUTOMATIC 6-SCENE TRANSITION
+   AUTOMILE — SIX SCENE AUTOMATIC TRANSITION
+   DO NOT CHANGE ANYTHING ELSE
 ========================================================= */
 
-document.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("load", function () {
 
-    const scenes = document.querySelectorAll(".cinematic-scene");
+    const scenes = document.querySelectorAll(
+        ".cinematic-solutions .cinematic-scene"
+    );
 
-    if (!scenes.length) {
-        console.log("No cinematic scenes found.");
+    console.log("AUTOMILE SCENES FOUND:", scenes.length);
+
+    if (scenes.length === 0) {
         return;
     }
 
@@ -564,17 +567,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function showScene(index) {
 
-        scenes.forEach((scene, i) => {
+        scenes.forEach(function (scene, i) {
 
-            scene.classList.toggle("active", i === index);
+            if (i === index) {
+
+                scene.style.opacity = "1";
+                scene.style.visibility = "visible";
+                scene.style.transform = "translateY(0)";
+                scene.style.pointerEvents = "auto";
+
+            } else {
+
+                scene.style.opacity = "0";
+                scene.style.visibility = "hidden";
+                scene.style.transform = "translateY(30px)";
+                scene.style.pointerEvents = "none";
+
+            }
 
         });
 
-        console.log("Showing solution:", index + 1);
+        console.log(
+            "AUTOMILE ACTIVE SCENE:",
+            index + 1
+        );
     }
 
+    // Show Scene 01 immediately
+    showScene(0);
 
-    function nextScene() {
+    // Move automatically through all six scenes
+    setInterval(function () {
 
         currentScene++;
 
@@ -584,14 +607,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         showScene(currentScene);
 
-    }
-
-
-    // Start with Vehicle Tracking
-    showScene(0);
-
-
-    // Automatically change every 6 seconds
-    setInterval(nextScene, 6000);
+    }, 5000);
 
 });
