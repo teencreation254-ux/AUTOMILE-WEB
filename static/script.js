@@ -546,10 +546,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
-
 /* =========================================================
-   AUTOMILE CINEMATIC SOLUTIONS
-   PREMIUM AUTO TRANSITION
+   AUTOMILE PREMIUM CINEMATIC SOLUTIONS
+   AUTOMATIC 6-SCENE TRANSITION
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -557,30 +556,32 @@ document.addEventListener("DOMContentLoaded", function () {
     const scenes = document.querySelectorAll(".cinematic-scene");
 
     if (!scenes.length) {
-        console.log("Cinematic scenes not found.");
+        console.log("No cinematic scenes found.");
         return;
     }
 
     let currentScene = 0;
-    let transitionTimer;
 
     function showScene(index) {
 
-        scenes.forEach(function (scene, i) {
+        scenes.forEach((scene, i) => {
 
-            if (i === index) {
-                scene.classList.add("active");
-            } else {
-                scene.classList.remove("active");
-            }
+            scene.classList.toggle("active", i === index);
 
         });
 
         console.log("Showing scene:", index + 1);
+
     }
 
+    /* Start with Scene 01 */
 
-    function nextScene() {
+    showScene(0);
+
+
+    /* Automatically move through all 6 scenes */
+
+    setInterval(function () {
 
         currentScene++;
 
@@ -589,21 +590,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         showScene(currentScene);
-    }
 
-
-    /* Start with Vehicle Tracking */
-
-    showScene(0);
-
-
-    /* Automatic premium transition */
-
-    transitionTimer = setInterval(function () {
-
-        nextScene();
-
-    }, 5000);
-
+    }, 6000);
 
 });
