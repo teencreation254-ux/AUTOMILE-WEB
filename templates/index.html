@@ -948,3 +948,73 @@ Send Request
     </div>
 
 </section>
+
+<script>
+/* =========================================================
+   AUTOMILE — CINEMATIC SCROLL DIRECTION
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const sections = document.querySelectorAll(
+        "body > section, main > section, section"
+    );
+
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    function updateScrollDirection() {
+
+        const currentScrollY = window.scrollY;
+        const scrollingDown = currentScrollY > lastScrollY;
+
+        sections.forEach(section => {
+
+            /* Never interfere with the cinematic section */
+            if (section.classList.contains("cinematic-solutions")) {
+                return;
+            }
+
+            const rect = section.getBoundingClientRect();
+
+            if (
+                rect.top < window.innerHeight * 0.85 &&
+                rect.bottom > window.innerHeight * 0.15
+            ) {
+
+                section.classList.remove("scroll-up");
+                section.classList.remove("scroll-down");
+
+                if (scrollingDown) {
+                    section.classList.add("scroll-down");
+                } else {
+                    section.classList.add("scroll-up");
+                }
+
+                requestAnimationFrame(() => {
+                    section.classList.add("section-visible");
+                });
+
+            }
+        });
+
+        lastScrollY = currentScrollY;
+        ticking = false;
+    }
+
+    window.addEventListener("scroll", function () {
+
+        if (!ticking) {
+            window.requestAnimationFrame(updateScrollDirection);
+            ticking = true;
+        }
+
+    }, { passive: true });
+
+    updateScrollDirection();
+
+});
+</script>
+
+</body>
+</html>

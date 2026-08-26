@@ -2396,3 +2396,68 @@ font-size:18px;
         font-size: 16px;
     }
 }
+/* =========================================================
+   AUTOMILE — SMOOTH CINEMATIC SECTION REVEALS
+   ========================================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Sections start slightly hidden */
+body > section,
+main > section,
+section {
+    opacity: 0;
+    transform: translateY(45px);
+    transition:
+        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Section becomes visible */
+section.section-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* When moving upward */
+section.scroll-up {
+    transform: translateY(-45px);
+}
+
+/* When moving downward */
+section.scroll-down {
+    transform: translateY(45px);
+}
+
+/* Keep the cinematic solution section controlled by its
+   existing animation system */
+section.cinematic-solutions {
+    opacity: 1;
+    transform: none;
+}
+
+/* Keep modal elements unaffected */
+.solution-modal {
+    opacity: 1;
+    transform: none;
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    section {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
