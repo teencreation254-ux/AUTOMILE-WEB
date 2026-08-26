@@ -2025,3 +2025,374 @@ font-size:18px;
     background: rgba(0, 0, 0, 0.05);
     pointer-events: none;
 }
+/* =========================================================
+   AUTOMILE — PREMIUM CONTACT SECTION
+   ========================================================= */
+
+#contact.automile-contact {
+    width: 100%;
+    min-height: 680px;
+    padding: 100px 7%;
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 80px;
+    align-items: center;
+
+    background:
+        radial-gradient(
+            circle at 85% 50%,
+            rgba(255, 165, 0, 0.08),
+            transparent 38%
+        ),
+        #05090d;
+
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle architectural line */
+#contact.automile-contact::before {
+    content: "";
+    position: absolute;
+    left: 7%;
+    right: 7%;
+    top: 0;
+    height: 1px;
+    background: rgba(255, 165, 0, 0.35);
+}
+
+
+/* =========================================================
+   LEFT SIDE
+   ========================================================= */
+
+#contact .contact-intro {
+    position: relative;
+    z-index: 2;
+    max-width: 560px;
+}
+
+#contact .contact-label {
+    display: inline-block;
+    margin-bottom: 22px;
+
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: #f5a400;
+}
+
+#contact .contact-intro h2 {
+    margin: 0 0 25px;
+
+    font-size: clamp(48px, 6vw, 82px);
+    line-height: 0.95;
+    font-weight: 800;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+
+    color: #ffffff;
+}
+
+#contact .contact-intro h2::after {
+    content: "";
+    display: block;
+
+    width: 75px;
+    height: 4px;
+
+    margin-top: 28px;
+
+    background: #f5a400;
+}
+
+#contact .contact-intro > p {
+    max-width: 500px;
+
+    margin: 30px 0 45px;
+
+    font-size: 18px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.72);
+}
+
+
+/* =========================================================
+   DIRECT CONTACT DETAILS
+   ========================================================= */
+
+#contact .contact-direct {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 35px;
+}
+
+#contact .contact-direct div {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    padding-left: 18px;
+
+    border-left: 2px solid rgba(245, 164, 0, 0.75);
+}
+
+#contact .contact-direct strong {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #f5a400;
+}
+
+#contact .contact-direct span {
+    font-size: 15px;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+
+/* =========================================================
+   FORM CONTAINER
+   ========================================================= */
+
+#contact .contact-form-box {
+    position: relative;
+    z-index: 2;
+
+    padding: 42px;
+
+    background: rgba(255, 255, 255, 0.035);
+
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 4px;
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+
+/* =========================================================
+   FORM FIELDS
+   ========================================================= */
+
+#contact .form-group {
+    margin-bottom: 22px;
+}
+
+#contact .form-group label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+
+    color: rgba(255, 255, 255, 0.65);
+}
+
+#contact input,
+#contact select,
+#contact textarea {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 16px 17px;
+
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 2px;
+
+    background: rgba(255, 255, 255, 0.055);
+
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 15px;
+
+    outline: none;
+
+    transition:
+        border-color 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+#contact input::placeholder,
+#contact textarea::placeholder {
+    color: rgba(255, 255, 255, 0.38);
+}
+
+#contact select {
+    cursor: pointer;
+}
+
+#contact select option {
+    background: #10161b;
+    color: #ffffff;
+}
+
+#contact textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+#contact input:focus,
+#contact select:focus,
+#contact textarea:focus {
+    border-color: #f5a400;
+
+    background: rgba(255, 255, 255, 0.075);
+
+    box-shadow:
+        0 0 0 2px rgba(245, 164, 0, 0.08);
+}
+
+
+/* =========================================================
+   TWO-COLUMN FORM ROW
+   ========================================================= */
+
+#contact .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+
+/* =========================================================
+   CONSENT
+   ========================================================= */
+
+#contact .consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+
+    margin: 8px 0 25px;
+
+    cursor: pointer;
+
+    font-size: 12px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.58);
+}
+
+#contact .consent input {
+    width: 16px;
+    height: 16px;
+
+    flex: 0 0 16px;
+
+    margin-top: 2px;
+
+    accent-color: #f5a400;
+}
+
+
+/* =========================================================
+   SEND BUTTON
+   ========================================================= */
+
+#contact .contact-submit {
+    width: 100%;
+
+    padding: 17px 24px;
+
+    border: 1px solid #f5a400;
+    border-radius: 2px;
+
+    background: #f5a400;
+    color: #080b0e;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+#contact .contact-submit:hover {
+    background: transparent;
+    color: #f5a400;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    #contact.automile-contact {
+        grid-template-columns: 1fr;
+        gap: 55px;
+        padding: 80px 6%;
+    }
+
+    #contact .contact-intro {
+        max-width: 700px;
+    }
+
+    #contact .contact-intro h2 {
+        font-size: clamp(48px, 10vw, 72px);
+    }
+
+    #contact .contact-form-box {
+        max-width: 700px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    #contact.automile-contact {
+        padding: 65px 22px;
+        gap: 45px;
+    }
+
+    #contact .contact-intro h2 {
+        font-size: 48px;
+        letter-spacing: -1px;
+    }
+
+    #contact .contact-intro > p {
+        font-size: 16px;
+    }
+
+    #contact .contact-direct {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    #contact .contact-form-box {
+        padding: 25px 20px;
+    }
+
+    #contact .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    #contact input,
+    #contact select,
+    #contact textarea {
+        font-size: 16px;
+    }
+}
